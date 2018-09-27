@@ -1,0 +1,96 @@
+<% accent_color         = '#FFF' %>
+<% color                = '#FFF' %>
+<% dark_color           = "#000" %>
+<% description_bg_color = 'yellow' %>
+<% description_color    = '#000' %>
+
+<% omg              = params.fetch(:omg, {}) %>
+
+<% title_text       = omg.fetch(:title, '') %>
+<% description_text = omg.fetch(:description, '') %>
+<% tags             = Array.wrap(omg.fetch(:tags, [])) %>
+
+<style>
+  body{
+    background: white;
+    margin:0;
+    padding:0;
+    overflow: hidden;
+    position:relative;
+  }
+  .preview-div-wrapper{
+    overflow: hidden;
+    position:relative;
+  }
+  .preview-div{
+    background: #fff;
+    border: 0.25vw solid <%= dark_color %>;
+    box-shadow: 0.8vw 1vw 0px <%= dark_color %>;
+    width: 88vw;
+    height: 44vw;
+    margin: 2.5vw auto 5vw;
+    overflow: hidden;
+    position:relative;
+  }
+  .preview-info-header{
+    color: black;
+    margin: 2vw auto 0vw;
+    font-family:  "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 3.5vw;
+    width: 92%;
+  }
+  h1{
+    color: <%= dark_color %>;
+    width: 92%;
+    margin: 1vw auto;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  }
+  .preview-description {
+    font-size: 3.5vw;
+    position: absolute;
+    background: <%= description_bg_color %>;
+    color: <%= description_color %>;
+    left: 1.5vw;
+    bottom: 1.5vw;
+    padding: 1vw 2vw;
+    font-weight: 300;
+  }
+  .preview-tags {
+    position: absolute;
+    right: 1.5vw;
+    bottom: 1.5vw;
+    padding: 1vw 2vw;
+    font-weight: 300;
+  }
+  .preview-tags .tag {
+    font-size: 2.0vw;
+    margin-right: 0.8vw;
+    padding: 0.4vw 0.8vw;
+  }
+</style>
+
+<div class="preview-div-wrapper">
+  <div class="preview-div">
+    <% font_size = 15 - (((title_text.size**0.89)+85)/16) %>
+    <h1 style="font-size:<%= font_size %>vw;"><%= title_text %><h1>
+
+    <% if description_text.present? %>
+      <div class="preview-description">
+        <%= description_text %>
+      </div>
+    <% end %>
+
+    <% if tags.any? %>
+      <div class="preview-tags">
+        <% shift = rand(10) %>
+        <% tags.each_with_index do |tag, index| %>
+          <% color = assigned_color(shift + index) %>
+          <span class='tag' style="background: <%= color[:bg] %>; color: <%= color[:text] %>">
+            <%= tag %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+</div>
