@@ -1,4 +1,4 @@
-host = "192.168.243.128"
+host = "192.168.223.129"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
