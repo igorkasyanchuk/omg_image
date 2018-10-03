@@ -50,12 +50,15 @@
   .preview-description {
     font-size: 3.5vw;
     position: absolute;
-    background: <%= description_bg_color %>;
-    color: <%= description_color %>;
-    left: 1.5vw;
-    bottom: 1.5vw;
+    left: 0.5vw;
+    bottom: 0.5vw;
     padding: 1vw 2vw;
     font-weight: 300;
+  }
+  .preview-description img {
+    display: inline-block;
+    width: 6vw;
+    height: 6vh;
   }
   .preview-tags {
     position: absolute;
@@ -76,11 +79,9 @@
     <% font_size = 15 - (((title_text.size**0.89)+85)/16) %>
     <h1 style="font-size:<%= font_size %>vw;"><%= raw title_text %><h1>
 
-    <% if description_text.present? %>
-      <div class="preview-description">
-        <%= raw description_text %>
-      </div>
-    <% end %>
+    <div class="preview-description">
+      <%= image_tag 'logo.svg' %>
+    </div>
 
     <% if tags.any? %>
       <div class="preview-tags">

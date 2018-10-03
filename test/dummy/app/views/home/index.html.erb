@@ -1,10 +1,18 @@
 <h1>Home#index</h1>
 <p>
+  <%- OmgImage::Image.delete_all %>
+
+  <%= image_tag omg_image_preview(omg: {title: "Hi People<br/>how are you?", description: "Rails", size: '300,150'}) %>
+
+  <br/>
 
   <%= image_tag omg_image_preview(omg: {title: "This is very interesting article. Check me out.", description: "Rails", x: 'xxxx'}) %>
 
   <br/>
 
-  <%= image_tag omg_image_preview(omg: {title: "Hi, This is very interesting article. Check me out. And here and here. Please read me.", description: "Ruby", tags: ["Ruby", "Javascript", "C++", "React.js"]}, size: '1200,600') %>
+  <%= image_tag omg_image_preview(omg: {title: "Hi, This is very interesting article. Check me out. And here and here. Please read me.", description: "Ruby", tags: ["Ruby", "Javascript", "C++", "React.js"], size: '1200,600'}) %>
 
+  <br/>
+  <br/>
+  <br/>
 </p>

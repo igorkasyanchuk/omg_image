@@ -5,9 +5,11 @@ module OmgImage
   module ApplicationHelper
     include OmgHelper
 
-    def omg_image_preview(omg: {}, size: '800,400')
-      omg       ||= {}
-      omg[:key] ||= omg.to_s
+    def omg_image_preview(omg: {})
+      omg        ||= {}
+      omg[:size] ||= '800,400'  
+      omg[:key]  ||= omg.to_s
+
       image       = OmgImage::Image.find_by(key: omg[:key])
 
       if image && !image.file.attached?
@@ -15,19 +17,19 @@ module OmgImage
         image = nil
       end
 
-      file = image&.file || create_screenshot(omg, size)
+      file = image&.file || create_screenshot(omg)
       file ?  url_for(file) : "something-went-wrong.png"
     end
 
     private
 
-    def create_screenshot(omg, size)
+    def create_screenshot(omg)
       begin
         file = Tempfile.new("image.png")
 
         options = {
           file: file,
-          size: size,
+          size: omg[:size],
           url: omg_image.preview_url(omg: omg)
         }
 

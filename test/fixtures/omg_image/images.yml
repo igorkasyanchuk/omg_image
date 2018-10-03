@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: omg_image_images
+#
+#  id         :integer          not null, primary key
+#  key        :string
+#  created_at :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
