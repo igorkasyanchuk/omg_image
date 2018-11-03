@@ -6,12 +6,6 @@
 <% border_color         = '#000' %>
 <% shadow_color         = '#555' %>
 
-<% omg              = params.fetch(:omg, {}) %>
-
-<% title_text       = omg.fetch(:title, '') %>
-<% description_text = omg.fetch(:description, '') %>
-<% tags             = Array.wrap(omg.fetch(:tags, [])) %>
-
 <style>
   body{
     background: white;
@@ -20,11 +14,11 @@
     overflow: hidden;
     position:relative;
   }
-  .preview-div-wrapper{
+  .preview-div-wrapper {
     overflow: hidden;
     position:relative;
   }
-  .preview-div{
+  .preview-div {
     background: #fff;
     border: 0.25vw solid <%= border_color %>;
     box-shadow: 0.8vw 1vw 0px <%= shadow_color %>;
@@ -34,7 +28,7 @@
     overflow: hidden;
     position:relative;
   }
-  .preview-info-header{
+  .preview-info-header {
     color: black;
     margin: 2vw auto 0vw;
     font-family:  "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
@@ -50,12 +44,23 @@
   .preview-description {
     font-size: 3.5vw;
     position: absolute;
-    background: <%= description_bg_color %>;
-    color: <%= description_color %>;
     left: 1.5vw;
     bottom: 1.5vw;
     padding: 1vw 2vw;
     font-weight: 300;
+    display: flex;
+    flex-flow: row;
+    height: 4vh;    
+    align-items: center;
+  }
+  .preview-description img {
+    display: inline-block;
+    width: 3vw;
+  }
+  .preview-description span {
+    font-size: 2.0vw;
+    padding-top: 1vh;
+    padding-left: 0.5vw;
   }
   .preview-tags {
     position: absolute;
@@ -73,14 +78,13 @@
 
 <div class="preview-div-wrapper">
   <div class="preview-div">
-    <% font_size = 15 - (((title_text.size**0.89)+85)/16) %>
-    <h1 style="font-size:<%= font_size %>vw;"><%= raw title_text %><h1>
+    <% font_size = 15 - (((title.size**0.89)+85)/16) %>
+    <h1 style="font-size:<%= font_size %>vw;"><%= raw title %><h1>
 
-    <% if description_text.present? %>
-      <div class="preview-description">
-        <%= raw description_text %>
-      </div>
-    <% end %>
+    <div class="preview-description">
+      <%= image_tag 'logo.svg' %>
+      <span><%= description %></span>
+    </div>
 
     <% if tags.any? %>
       <div class="preview-tags">

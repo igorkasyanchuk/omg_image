@@ -2,9 +2,9 @@ PATH
   remote: .
   specs:
     omg_image (0.1.0)
-      gastly
+      better_tempfile
       open4
-      rails (~> 5.2.1)
+      rails (>= 5.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -51,14 +51,12 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (9.0.0)
+    better_tempfile (0.1.0)
     builder (3.2.3)
     coderay (1.1.2)
     concurrent-ruby (1.1.0)
     crass (1.0.4)
     erubi (1.7.1)
-    gastly (1.0.1)
-      mini_magick (~> 4.2)
-      phantomjs (~> 2.1.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (1.1.1)
@@ -72,7 +70,6 @@ GEM
       mimemagic (~> 0.3.2)
     method_source (0.9.0)
     mimemagic (0.3.2)
-    mini_magick (4.9.2)
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
@@ -80,7 +77,6 @@ GEM
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     open4 (1.3.4)
-    phantomjs (2.1.1.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
