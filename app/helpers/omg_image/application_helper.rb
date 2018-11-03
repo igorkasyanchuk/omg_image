@@ -13,22 +13,23 @@ module OmgImage
       options[:size] ||= '800,400'  
       options[:key]  ||= options.to_s
 
-      image       = OmgImage::Image.find_by(key: options[:key])
-
+      image = OmgImage::Image.find_by(key: options[:key])
       if image && !image.file.attached?
         image.destroy
         image = nil
       end
 
       file = image&.file || create_screenshot(options)
-      file ?  url_for(file) : "something-went-wrong.png"
+      file ? url_for(file) : "something-went-wrong.png"
     end
 
     private
 
     def create_screenshot(options)
       begin
+        start = Time.now
         body  = OmgImage::Renderer.render('entity.html.erb', locals: options)
+        Rails.logger.debug "  to_html: #{(Time.now - start).round(2)}"
 
         input = BetterTempfile.new("input.html")
         input.write(body)
@@ -36,37 +37,19 @@ module OmgImage
 
         output = BetterTempfile.new("image.png")
 
-        options = {
-          file: output,
-          size: options[:size],
-          path: input.path
-        }
-
+        options = { file: output, size: options[:size], path: input.path }
         command = build_chrome_command(options)
         Rails.logger.debug "  ====>> executing: #{command}"
 
-        # err = Open3.popen3(*command) do |_stdin, _stdout, stderr|
-        #   puts "stdout: #{_stdout.read}"
-        #   stderr.read
-        # end
-        # if err.present?
-        #   Rails.logger.debug "  ===>> error: #{err}"
-        # else
-        #   Rails.logger.debug "Attaching ...."
-        # end
-        # err = Open4::popen4(command) do |pid, stdin, stdout, stderr|
-        #   Rails.logger.info "pid: #{pid}"
-        #   stderr.read
-        # end
-
+        start = Time.now
         begin
-          process = open4.spawn command, timeout: 5
+          process = open4.spawn(command, timeout: 10)
         rescue Timeout::Error
           Process.kill('KILL', process.pid) rescue nil
         end
+        Rails.logger.debug "  to_image: #{(Time.now - start).round(2)}"
 
         image = OmgImage::Image.find_or_create_by(key: options[:key])
-
         if !image.file.attached?
           image.file.attach(io: File.open(output.path), filename: "image.png", content_type: "image/png")
           image.save
@@ -74,8 +57,8 @@ module OmgImage
 
         image.file
       ensure
-        output.close! if output
-        input.close! if input
+        output&.close!
+        input&.close!
       end
     end
 
