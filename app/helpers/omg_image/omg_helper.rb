@@ -2,24 +2,8 @@ module OmgImage
   module OmgHelper
     COLORS = [
       {
-        bg: "#093656",
-        text: "#ffffff",
-      },
-      {
         bg: "#19063A",
         text: "#dce9f3",
-      },
-      {
-        bg: "#0D4D4B",
-        text: "#fdf9f3",
-      },
-      {
-        bg: "#61122f",
-        text: "#ffffff",
-      },
-      {
-        bg: "#edebf6",
-        text: " #070126",
       },
       {
         bg: "#080E3B",

@@ -21,6 +21,13 @@ Or install it yourself as:
 $ gem install omg_image
 ```
 
+## Development
+
+- install chrome headless 
+- add to `/etc/hosts` new host `127.0.0.0     site.com`
+- in `puma.rb` put `workers ENV.fetch("WEB_CONCURRENCY") { 3 }` (required because screenshot is made from another request)
+- 
+
 ## Contributing
 Contribution directions go here.
 

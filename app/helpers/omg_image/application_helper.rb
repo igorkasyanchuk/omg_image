@@ -1,5 +1,16 @@
 require 'uri'
 require 'tempfile'
+require 'open3'
+
+class BetterTempfile < Tempfile
+  # ensures the Tempfile's filename always keeps its extension
+  def initialize(filename, temp_dir = nil)
+    temp_dir ||= Dir.tmpdir
+    extension = File.extname(filename)
+    basename  = File.basename(filename, extension)
+    super([basename, extension], temp_dir)
+  end
+end
 
 module OmgImage
   module ApplicationHelper
@@ -25,7 +36,7 @@ module OmgImage
 
     def create_screenshot(omg)
       begin
-        file = Tempfile.new("image.png")
+        file = BetterTempfile.new("image.png")
 
         options = {
           file: file,
@@ -35,7 +46,15 @@ module OmgImage
 
         command = build_chrome_command(options)
         Rails.logger.debug "  ====>> executing: #{command}"
-        `#{command}`
+
+        err = Open3.popen3(*command) do |_stdin, _stdout, stderr|
+          puts "stdout: #{_stdout.read}"
+          stderr.read
+        end
+
+        if err.present?
+          Rails.logger.debug "  ===>> error: #{err}"
+        end
 
         image = OmgImage::Image.find_or_create_by(key: omg[:key])
 

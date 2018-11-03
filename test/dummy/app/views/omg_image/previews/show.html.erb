@@ -20,11 +20,11 @@
     overflow: hidden;
     position:relative;
   }
-  .preview-div-wrapper{
+  .preview-div-wrapper {
     overflow: hidden;
     position:relative;
   }
-  .preview-div{
+  .preview-div {
     background: #fff;
     border: 0.25vw solid <%= border_color %>;
     box-shadow: 0.8vw 1vw 0px <%= shadow_color %>;
@@ -34,7 +34,7 @@
     overflow: hidden;
     position:relative;
   }
-  .preview-info-header{
+  .preview-info-header {
     color: black;
     margin: 2vw auto 0vw;
     font-family:  "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
@@ -50,15 +50,23 @@
   .preview-description {
     font-size: 3.5vw;
     position: absolute;
-    left: 0.5vw;
-    bottom: 0.5vw;
+    left: 1.5vw;
+    bottom: 1.5vw;
     padding: 1vw 2vw;
     font-weight: 300;
+    display: flex;
+    flex-flow: row;
+    height: 4vh;    
+    align-items: center;
   }
   .preview-description img {
     display: inline-block;
-    width: 6vw;
-    height: 6vh;
+    width: 3vw;
+  }
+  .preview-description span {
+    font-size: 2.0vw;
+    padding-top: 1vh;
+    padding-left: 0.5vw;
   }
   .preview-tags {
     position: absolute;
@@ -81,6 +89,7 @@
 
     <div class="preview-description">
       <%= image_tag 'logo.svg' %>
+      <span><%= description_text %></span>
     </div>
 
     <% if tags.any? %>
