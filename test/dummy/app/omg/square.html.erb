@@ -1,0 +1,22 @@
+<style>
+  body{
+    background: yellow;
+    display: flex;
+    flex-direction: columns;
+    align-items: center;
+    text-align: center;
+  }
+  h1 {
+    color: #000;
+    width: 92%;
+    margin: 1vw auto;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  }
+</style>
+
+<div class="preview-div-wrapper">
+  <div class="preview-div">
+    <% font_size = 15 - (((title.size**0.89)+85)/16) %>
+    <h1 style="font-size:<%= font_size %>vw;"><%= raw title %><h1>
+  </div>
+</div>

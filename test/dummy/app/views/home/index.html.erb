@@ -1,18 +1,9 @@
-<h1>Home#index</h1>
+<h1>Sample of work:</h1>
+<p>this is an images generated on the fly</p>
 <p>
-  <%#- OmgImage::Image.delete_all %>
-
-  <%= image_tag omg_image_preview(title: "Hi People<br/>how are you?", tags: ['Ruby', 'RoR', 'JS', 'React'], description: "Rails #{rand(200000)}", size: '800,400') %>
-
+  <%= image_tag omg_image_preview('entity.html.erb', title: "OMG,<br/>this looks interesting!", tags: ['This', 'is', 'a', 'sample'], description: "Change me please", size: '600,300') %>
   <br/>
-
-  <%#= image_tag omg_image_preview(title: "This is very interesting article. Check me out.", description: "Rails", x: 'xxxx'} %>
-
+  <%= image_tag omg_image_preview('entity.html.erb', title: "OMG,<br/>this looks interesting!", description: "Small version", size: '400,200') %>
   <br/>
-
-  <%#= image_tag omg_image_preview(title: "Hi, This is very interesting article. Check me out. And here and here. Please read me.", description: "Ruby", tags: ["Ruby", "Javascript", "C++", "React.js"], size: '1200,600') %>
-
-  <br/>
-  <br/>
-  <br/>
+  <%= image_tag omg_image_preview('square.html.erb', title: "Real-time generation", size: '200,200') %>
 </p>
