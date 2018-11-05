@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    omg_image (0.1.0)
+    omg_image (0.0.2)
       better_tempfile
       open4
       rails (>= 5.0.0)
@@ -54,7 +54,7 @@ GEM
     better_tempfile (0.1.0)
     builder (3.2.3)
     coderay (1.1.2)
-    concurrent-ruby (1.1.0)
+    concurrent-ruby (1.1.1)
     crass (1.0.4)
     erubi (1.7.1)
     globalid (0.4.1)

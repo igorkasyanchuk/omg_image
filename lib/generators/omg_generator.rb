@@ -3,5 +3,6 @@ class OmgGenerator < Rails::Generators::Base
   
   def create_omg_file
     directory "app/omg"
+    directory "db/migrate"
   end
 end
