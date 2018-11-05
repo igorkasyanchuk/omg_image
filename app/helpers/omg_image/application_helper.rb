@@ -1,76 +1,74 @@
 require 'uri'
 require 'tempfile'
-require 'open3'
-
-class BetterTempfile < Tempfile
-  # ensures the Tempfile's filename always keeps its extension
-  def initialize(filename, temp_dir = nil)
-    temp_dir ||= Dir.tmpdir
-    extension = File.extname(filename)
-    basename  = File.basename(filename, extension)
-    super([basename, extension], temp_dir)
-  end
-end
+require 'timeout'
+require 'open4'
 
 module OmgImage
   module ApplicationHelper
     include OmgHelper
 
-    def omg_image_preview(omg: {})
-      omg        ||= {}
-      omg[:size] ||= '800,400'  
-      omg[:key]  ||= omg.to_s
+    def omg_image_preview(template, options)
+      options        ||= {}
+      options[:size] ||= '800,400'
+      options[:key]  ||= options.to_s
 
-      image       = OmgImage::Image.find_by(key: omg[:key])
-
+      image = OmgImage::Image.find_by(key: options[:key])
       if image && !image.file.attached?
         image.destroy
         image = nil
       end
 
-      file = image&.file || create_screenshot(omg)
-      file ?  url_for(file) : "something-went-wrong.png"
+      file = image&.file || create_screenshot(template, options)
+
+      url_for(file) if file
     end
 
     private
 
-    def create_screenshot(omg)
+    def create_screenshot(template, options)
       begin
-        file = BetterTempfile.new("image.png")
+        start = Time.now
+        body  = OmgImage::Renderer.render(template, locals: options)
+        log_smt "  to_html: #{(Time.now - start).round(2)}"
 
-        options = {
-          file: file,
-          size: omg[:size],
-          url: omg_image.preview_url(omg: omg)
-        }
+        input = BetterTempfile.new("input.html")
+        input.write(body)
+        input.flush
 
+        output = BetterTempfile.new("image.png")
+
+        options = { file: output, size: options[:size], path: input.path }
         command = build_chrome_command(options)
-        Rails.logger.debug "  ====>> executing: #{command}"
+        log_smt "  => #{command}"
 
-        err = Open3.popen3(*command) do |_stdin, _stdout, stderr|
-          puts "stdout: #{_stdout.read}"
-          stderr.read
+        start = Time.now
+        begin
+          process = open4.spawn(command, timeout: 10)
+        rescue Timeout::Error
+          Process.kill('KILL', process.pid) rescue nil
         end
+        log_smt "  to_image: #{(Time.now - start).round(2)}"
 
-        if err.present?
-          Rails.logger.debug "  ===>> error: #{err}"
-        end
-
-        image = OmgImage::Image.find_or_create_by(key: omg[:key])
-
+        image = OmgImage::Image.find_or_create_by(key: options[:key])
         if !image.file.attached?
-          image.file.attach(io: File.open(file.path), filename: "image.png", content_type: "image/png")
+          image.file.attach(io: File.open(output.path), filename: "image.png", content_type: "image/png")
           image.save
         end
 
         image.file
       ensure
-        file.close!
+        output&.close!
+        input&.close!
       end
     end
 
     def build_chrome_command(options)
-      "google-chrome --headless --disable-gpu --no-sandbox --ignore-certificate-errors --screenshot=#{options[:file].path} --window-size=#{options[:size]} \"#{options[:url]}\""
+      size_opts = options[:size] == :auto ? nil : "--window-size=#{options[:size]}"
+      "google-chrome --headless --disable-gpu --no-sandbox --ignore-certificate-errors --screenshot=#{options[:file].path} #{size_opts} \"file://#{options[:path]}\""
+    end
+
+    def log_smt(str)
+      Rails.logger.debug(str)
     end
 
   end

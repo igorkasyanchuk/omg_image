@@ -49,7 +49,7 @@ module OmgImage
         bg: '#f2169a',
         text: '#fff'
       },
-    ].freeze
+    ].shuffle.freeze
 
     def assigned_color(id = rand(COLORS.size))
       COLORS[id % COLORS.size]

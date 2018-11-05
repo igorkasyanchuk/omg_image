@@ -6,12 +6,6 @@
 <% border_color         = '#000' %>
 <% shadow_color         = '#555' %>
 
-<% omg              = params.fetch(:omg, {}) %>
-
-<% title_text       = omg.fetch(:title, '') %>
-<% description_text = omg.fetch(:description, '') %>
-<% tags             = Array.wrap(omg.fetch(:tags, [])) %>
-
 <style>
   body{
     background: white;
@@ -84,12 +78,12 @@
 
 <div class="preview-div-wrapper">
   <div class="preview-div">
-    <% font_size = 15 - (((title_text.size**0.89)+85)/16) %>
-    <h1 style="font-size:<%= font_size %>vw;"><%= raw title_text %><h1>
+    <% font_size = 15 - (((title.size**0.89)+85)/16) %>
+    <h1 style="font-size:<%= font_size %>vw;"><%= raw title %><h1>
 
     <div class="preview-description">
       <%= image_tag 'logo.svg' %>
-      <span><%= description_text %></span>
+      <span><%= description %></span>
     </div>
 
     <% if tags.any? %>
