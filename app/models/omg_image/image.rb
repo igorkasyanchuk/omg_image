@@ -10,6 +10,6 @@
 module OmgImage
   class Image < ApplicationRecord
     has_one_attached :file
-    validates :key, presence: true
+    validates :key, presence: true, length: {minimum: 1, maximum: 250}
   end
 end

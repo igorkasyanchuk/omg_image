@@ -37,8 +37,8 @@ module OmgImage
 
         output = BetterTempfile.new("image.png")
 
-        options = { file: output, size: options[:size], path: input.path }
-        command = build_chrome_command(options)
+        cli_options = { file: output, size: options[:size], path: input.path }
+        command = build_chrome_command(cli_options)
         log_smt "  => #{command}"
 
         start = Time.now
@@ -46,13 +46,16 @@ module OmgImage
           process = open4.spawn(command, timeout: 10)
         rescue Timeout::Error
           Process.kill('KILL', process.pid) rescue nil
+          log_smt "omg error: please retry. options: #{options}"
+          return nil
         end
         log_smt "  to_image: #{(Time.now - start).round(2)}"
 
-        image = OmgImage::Image.find_or_create_by(key: options[:key])
+        image   = OmgImage::Image.find_by(key: options[:key])
+        image ||= OmgImage::Image.new(key: options[:key])
         if !image.file.attached?
           image.file.attach(io: File.open(output.path), filename: "image.png", content_type: "image/png")
-          image.save
+          image.save!
         end
 
         image.file
