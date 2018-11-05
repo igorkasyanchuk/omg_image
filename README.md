@@ -7,6 +7,10 @@ How to use my plugin.
 ## Installation
 Add this line to your application's Gemfile:
 
+- sudo apt install gdebi-core
+- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+- sudo gdebi google-chrome-stable_current_amd64.deb
+
 ```ruby
 gem 'omg_image'
 ```
