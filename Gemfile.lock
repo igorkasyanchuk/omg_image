@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    omg_image (0.0.2)
+    omg_image (0.0.3)
       better_tempfile
       open4
       rails (>= 5.0.0)

@@ -53,10 +53,6 @@
     height: 4vh;    
     align-items: center;
   }
-  .preview-description img {
-    display: inline-block;
-    width: 3vw;
-  }
   .preview-description span {
     font-size: 2.0vw;
     padding-top: 1vh;
@@ -81,12 +77,13 @@
     <% font_size = 15 - (((title.size**0.89)+85)/16) %>
     <h1 style="font-size:<%= font_size %>vw;"><%= raw title %><h1>
 
-    <div class="preview-description">
-      <%= image_tag 'logo.svg' %>
-      <span><%= description %></span>
-    </div>
+    <% if local_assigns.has_key?(:description) %>
+      <div class="preview-description">
+        <span><%= description %></span>
+      </div>
+    <% end %>
 
-    <% if tags.any? %>
+    <% if local_assigns.has_key?(:tags) && tags.any? %>
       <div class="preview-tags">
         <% shift = rand(10) %>
         <% tags.each_with_index do |tag, index| %>
@@ -97,6 +94,5 @@
         <% end %>
       </div>
     <% end %>
-
   </div>
 </div>
