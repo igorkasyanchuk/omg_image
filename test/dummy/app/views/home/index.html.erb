@@ -1,10 +1,18 @@
 <%# OmgImage::Image.destroy_all %>
+<%# Post.destroy_all %>
+
 <h1>Sample of work:</h1>
 <p>this is an images generated on the fly</p>
 <p>
-  <%= image_tag omg_image_preview('entity.html.erb', title: "OMG,<br/>this looks interesting!", tags: ['This', 'is', 'a', 'sample'], description: "Change me please", size: '600,300') %>
+  <%= image_tag OmgImage::Processor.new('entity', key: 'xxx', title: "OMG,<br/>this looks interesting!", tags: ['This', 'is', 'a', 'sample'], description: "Change me please", size: '600,300').cached_or_new(regenerate: true) %>
   <br/>
-  <%= image_tag omg_image_preview('entity.html.erb', title: "OMG,<br/>this looks interesting!", description: "Small version", size: '400,200') %>
+  <%= image_tag OmgImage::Processor.new('entity', title: "OMG,<br/>this looks interesting!", description: "Small version", size: '400,200').cached_or_new(regenerate: true) %>
   <br/>
-  <%= image_tag omg_image_preview('square.html.erb', title: "Real-time generation", size: '200,200') %>
+  <%= image_tag OmgImage::Processor.new('square', title: "Real-time generation", size: '200,200').cached_or_new(regenerate: true) %>
 </p>
+
+<% if Post.any? %>
+  <%= image_tag Post.first.preview %>
+<% else %>
+  <% Post.create_new_preview %>
+<% end %>

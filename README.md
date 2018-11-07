@@ -27,10 +27,22 @@ $ gem install omg_image
 
 ## Development
 
-- install chrome headless 
+- install chrome headless
 - add to `/etc/hosts` new host `127.0.0.0     site.com`
 - in `puma.rb` put `workers ENV.fetch("WEB_CONCURRENCY") { 3 }` (required because screenshot is made from another request)
-- 
+-
+
+## Chrome headless
+
+### Ubuntu (Linux)
+
+"Chrome"
+
+### Mac
+
+Config:
+
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --no-sandbox --ignore-certificate-errors --screenshot=/var/folders/mw/xsxqlk9d1d31blr91jpn77nw0000gn/T/image20181106-77613-1kk7jb3.png --window-size=600,300 "file:///var/folders/mw/xsxqlk9d1d31blr91jpn77nw0000gn/T/input20181106-77613-1e4t5e5.html"
 
 ## Issues
 
