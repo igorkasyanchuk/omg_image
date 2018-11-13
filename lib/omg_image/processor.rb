@@ -14,10 +14,10 @@ module OmgImage
 
     def cached_or_new(regenerate: false)
       reset_cache if regenerate
-      cached&.file || generate_new&.file
+      cached&.file || generate&.file
     end
 
-    def generate_new(cache: true)
+    def generate(cache: true)
       output = create_screenshot
       if cache
         image = save_to_cache(output)
@@ -28,7 +28,7 @@ module OmgImage
       end
     end
 
-    def generate(&block)
+    def with_screenshot(&block)
       create_screenshot(&block)
     end
 

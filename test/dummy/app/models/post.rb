@@ -4,9 +4,9 @@ class Post < ApplicationRecord
 
   def Post.create_new_preview
     processor = ::OmgImage::Processor.new('entity', title: "OMG,<br/>this is created from model", description: "Small version", size: '400,200')
-    processor.generate do |output|
+    processor.with_screenshot do |screenshot|
       post = Post.new
-      post.preview.attach(io: File.open(output.path), filename: "image.png", content_type: "image/png")
+      post.preview.attach(io: File.open(screenshot.path), filename: "image.png", content_type: "image/png")
       post.save!
     end
   end
