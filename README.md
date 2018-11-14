@@ -12,11 +12,11 @@ If you want to try, you just need a 5 min to see how it works. Gem is comming wi
 
 ## Usage
 
-- add this gem to Gemfile
-- make sure you have chrome installed
-- rails g omg
-- edit sample entity if you want `app/omg/simple.html.erb`
-- open any view, for example app/views/home/index.html and put:
+- add this gem to Gemfile - `gem "omg_image"`
+- make sure you have chrome installed (`google-chrome --version`)
+- execute `rails g omg` in app
+- edit sample template `app/omg/simple.html.erb`
+- open any view, for example you have `app/views/home/index.html.erb` and put:
 
 ```erb
   <%= image_tag OmgImage::Processor.new('entity', key: 'xxx', title: "OMG,<br/>this looks interesting!", tags: ['This', 'is', 'a', 'sample'], description: "Change me please", size: '600,300').cached_or_new %>
