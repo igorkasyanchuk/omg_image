@@ -68,11 +68,6 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
-```bash
-$ gem install omg_image
-```
-
 ## Features
 
 - you can generate images with any complexity (you just need to know html/css)
