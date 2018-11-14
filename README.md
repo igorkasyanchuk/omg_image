@@ -2,6 +2,8 @@
 
 Let's start with sample of what this gem can do (below are the images of generated previews):
 
+Youtube demo: [https://www.youtube.com/watch?v=Lso-B_fayhw](https://www.youtube.com/watch?v=Lso-B_fayhw)
+
 [![Sample](https://github.com/igorkasyanchuk/omg_image/blob/master/docs/sample2.png?raw=true)](https://github.com/igorkasyanchuk/omg_image/blob/master/docs/sample2.png?raw=true)
 
 If you need to generate complex images, previews, charts or basically represent any HTML snippet - this gem could help.
@@ -97,8 +99,11 @@ $ gem install omg_image
 
 - ability to configure app (path to chrome for example)
 - more samples (with layout)
-- wiki pages
+- wiki pages with documentation and samples
 - ability to preview templates directly by URL
+- tests/specs
+- options to delay rendering (could be useful if use JS libraries or external assets)
+- support remote URL's to render (so it would possible to capture screenshots for example)
 
 ## Contributing
 
