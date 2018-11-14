@@ -1,6 +1,6 @@
 # omg_image
 
-Let's start with sample of what this gem can do:
+Let's start with sample of what this gem can do (below are the images of generated previews):
 
 [![Sample](https://github.com/igorkasyanchuk/omg_image/blob/master/docs/sample2.png?raw=true)](https://github.com/igorkasyanchuk/omg_image/blob/master/docs/sample2.png?raw=true)
 
