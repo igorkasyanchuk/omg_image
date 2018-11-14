@@ -1,5 +1,7 @@
 # omg_image
 
+Let's start with sample of what this gem can do:
+
 [![Sample](https://github.com/igorkasyanchuk/omg_image/blob/master/docs/sample2.png?raw=true)](https://github.com/igorkasyanchuk/omg_image/blob/master/docs/sample2.png?raw=true)
 
 If you need to generate complex images, previews, charts or basically represent any HTML snippet - this gem could help.
