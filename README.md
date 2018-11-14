@@ -17,6 +17,7 @@ If you want to try, you just need a 5 min to see how it works. Gem is comming wi
 - add this gem to Gemfile - `gem "omg_image"`
 - make sure you have chrome installed (`google-chrome --version`)
 - execute `rails g omg` in app
+- execute `rake db:migrate`
 - edit sample template `app/omg/simple.html.erb`
 - open any view, for example you have `app/views/home/index.html.erb` and put:
 
@@ -79,6 +80,10 @@ $ gem install omg_image
 - generate images in background jobs or console applications
 - caching for previews by `key`
 - ability to refresh preview by `key`
+
+# Options
+
+- `.cached_or_new(regenerate: true)` pass this option with true value if you want to regenerate image
 
 ## Google Chrome Installation
 
