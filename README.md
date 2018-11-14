@@ -2,7 +2,7 @@
 
 Let's start with sample of what this gem can do (below are the images of generated previews):
 
-Youtube demo: [https://www.youtube.com/watch?v=Lso-B_fayhw](https://www.youtube.com/watch?v=Lso-B_fayhw)
+Demo: [https://www.youtube.com/watch?v=Lso-B_fayhw](https://www.youtube.com/watch?v=Lso-B_fayhw)
 
 [![Sample](https://github.com/igorkasyanchuk/omg_image/blob/master/docs/sample2.png?raw=true)](https://github.com/igorkasyanchuk/omg_image/blob/master/docs/sample2.png?raw=true)
 
