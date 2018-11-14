@@ -111,7 +111,7 @@ You are welcome to contribute.
 
 ## Inspirations
 
-I noticed that articles without previews on dev.to site when you sending a link in skype or sharing in FB have nice preview, so I've implemented similar :)
+I've noticed that in a past that articles on dev.to site  without images when you sending a link in skype or sharing in FB have have nice preview, so I've implemented similar solution :)
 
 ## License
 
