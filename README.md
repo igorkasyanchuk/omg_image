@@ -1,5 +1,7 @@
 # omg_image
 
+[![Sample](https://github.com/igorkasyanchuk/omg_image/blob/master/docs/sample.png?raw=true)](https://github.com/igorkasyanchuk/omg_image/blob/master/docs/sample.png?raw=true)
+
 If you need to generate complex images, previews, charts or basically represent any HTML snippet - this gem could help.
 
 It's using a Chrome(headless) to convert any HTML to PNG. 
@@ -76,9 +78,9 @@ $ gem install omg_image
 
 ## Google Chrome Installation
 
-- sudo apt install gdebi-core
-- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-- sudo gdebi google-chrome-stable_current_amd64.deb
+- `sudo apt install gdebi-core`
+- `wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb`
+- `sudo gdebi google-chrome-stable_current_amd64.deb`
 - verify chrome is installed `google-chrome --version`
 
 ## More about Chrome
