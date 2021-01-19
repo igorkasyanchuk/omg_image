@@ -1,5 +1,7 @@
 # omg_image
 
+[![RailsJazz](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/my_other.svg?raw=true)](https://www.railsjazz.com)
+
 Let's start with sample of what this gem can do (below are the images of generated previews):
 
 Demo: [https://www.youtube.com/watch?v=Lso-B_fayhw](https://www.youtube.com/watch?v=Lso-B_fayhw)
